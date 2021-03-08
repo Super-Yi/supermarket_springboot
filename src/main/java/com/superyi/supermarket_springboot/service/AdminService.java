@@ -4,18 +4,20 @@ import com.superyi.supermarket_springboot.model.dao.AdminDao;
 import com.superyi.supermarket_springboot.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Super-Yi
- * @create 2021/3/5
  **/
 @Service
+@Transactional
 public class AdminService {
 
     @Autowired
     AdminDao adminDao;
 
     public User getAdmin(User user) {
+        System.out.println(user.toString());
         return adminDao.getAdmin(user);
     }
 }
