@@ -28,9 +28,9 @@
             <nav>
                 <ul class="list">
                     <li id="active"><a href="billList.jsp">账单管理</a></li>
-                    <li><a href="../providerList.jsp">供应商管理</a></li>
-                    <li><a href="../userList.jsp">用户管理</a></li>
-                    <li><a href="../password.jsp">密码修改</a></li>
+                    <li><a href="providerList.jsp">供应商管理</a></li>
+                    <li><a href="userList.jsp">用户管理</a></li>
+                    <li><a href="password.jsp">密码修改</a></li>
                     <li><a href="login.jsp">退出系统</a></li>
                 </ul>
             </nav>

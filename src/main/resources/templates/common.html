@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_css">
+    <link rel="stylesheet" href="css/public.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<!--头部-->
+<header th:fragment="common_header" class="publicHeader">
+    <h1>超市账单管理系统</h1>
+
+    <div class="publicHeaderR">
+        <p><span>下午好！</span><span style="color: #fff21b">[[${session.admin.userName}]]</span> , 欢迎你！</p>
+        <a href="login.html">退出</a>
+    </div>
+</header>
+<!--时间-->
+<section th:fragment="common_time" class="publicTime">
+    <span id="time">2015年1月1日 11:11  星期一</span>
+    <a href="#">温馨提示：为了能正常浏览，请使用高版本浏览器！（IE10+）</a>
+</section>
+<!--左侧菜单-->
+<div th:fragment="common_leftmenu" class="left">
+    <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
+    <nav>
+        <ul class="list">
+            <li ><a href="jsp/billList.jsp">账单管理</a></li>
+            <li><a href="jsp/providerList.jsp">供应商管理</a></li>
+            <li><a href="jsp/userList.jsp">用户管理</a></li>
+            <li><a href="jsp/password.jsp">密码修改</a></li>
+            <li><a href="jsp/login.jsp">退出系统</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

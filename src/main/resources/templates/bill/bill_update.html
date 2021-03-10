@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+xmlns:th="http://www.thymeleaf.org"
+<link th:include="common :: common_css">
+<!--头部-->
+<header th:replace="common :: common_header"></header>
+<!--时间-->
+<section th:replace="common :: common_time"></section>
+<div th:replace="common :: common_leftmenu"></div>
+</body>
+</html>
