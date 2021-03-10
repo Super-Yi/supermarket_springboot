@@ -28,12 +28,18 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String getAdmin(User user, HttpSession session, Model model) {
+    public String adminLogin(User user, HttpSession session, Model model) {
         if (!ObjectUtils.isEmpty(user.getUserCode()) && !ObjectUtils.isEmpty(user.getUserPassword())) {
-            session.setAttribute("loginUser", user);
-            return "redirect:/main.html";
+            User admin = adminService.getAdmin(user);
+            if (admin != null) {
+                session.setAttribute("admin", admin);
+                return "redirect:/index";
+            } else {
+                model.addAttribute("msg", "账号密码错误");
+                return "login";
+            }
         } else {
-            model.addAttribute("msg", "账号密码错误");
+            model.addAttribute("msg", "账号密码不能为空");
             return "login";
         }
     }

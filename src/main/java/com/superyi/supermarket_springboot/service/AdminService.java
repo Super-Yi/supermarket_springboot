@@ -17,7 +17,8 @@ public class AdminService {
     AdminDao adminDao;
 
     public User getAdmin(User user) {
-        System.out.println(user.toString());
-        return adminDao.getAdmin(user);
+        User admin = adminDao.getAdmin(user);
+        System.out.println(admin.toString());
+        return admin;
     }
 }
