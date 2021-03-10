@@ -5,6 +5,6 @@
 <mapper namespace="com.superyi.supermarket_springboot.model.dao.AdminDao">
     <!--查询用户-->
     <select id="getAdmin" resultType="com.superyi.supermarket_springboot.model.entity.User">
-    select * from sm_user where user_code=#{userCode}
+    select * from sm_user where user_code=#{userCode} and user_password=#{userPassword}
     </select>
 </mapper>

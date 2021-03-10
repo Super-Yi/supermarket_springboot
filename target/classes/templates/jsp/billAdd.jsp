@@ -29,9 +29,9 @@
         <nav>
             <ul class="list">
                 <li id="active"><a href="billList.jsp">账单管理</a></li>
-                <li><a href="providerList.jsp">供应商管理</a></li>
-                <li><a href="userList.jsp">用户管理</a></li>
-                <li><a href="password.jsp">密码修改</a></li>
+                <li><a href="../providerList.jsp">供应商管理</a></li>
+                <li><a href="../userList.jsp">用户管理</a></li>
+                <li><a href="../password.jsp">密码修改</a></li>
                 <li><a href="login.jsp">退出系统</a></li>
             </ul>
         </nav>
@@ -42,50 +42,49 @@
             <span>账单管理页面 >> 订单添加页面</span>
         </div>
         <div class="providerAdd">
-            <form action="/updateBillServlet" method="post">
-                <input type="hidden" name="id" value="${id}">
+            <form action="/addBillServlet" method="post">
                 <!--div的class 为error是验证错误，ok是验证成功-->
                 <div class="">
-                    <label for="providerId">订单编码：</label>
-                    <input type="text" name="billCode" id="providerId" value="${bill.billCode}" placeholder="请输入订单编码"/>
-                    <span>*</span>
+                    <label for="billId">订单编码：</label>
+                    <input type="text" name="billCode" id="billId" required/>
+                    <span>*请输入订单编码</span>
                 </div>
                 <div>
-                    <label for="providerName">商品名称：</label>
-                    <input type="text" name="productName" id="providerName" value="${bill.productName}" placeholder="请输入订单编码"/>
-                    <span >*</span>
+                    <label for="billName">商品名称：</label>
+                    <input type="text" name="productName" id="billName" required/>
+                    <span >*请输入商品名称</span>
                 </div>
                 <div>
-                    <label for="people">商品单位：</label>
-                    <input type="text" name="productUnit" id="people" value="${bill.productUnit}" placeholder="请输入商品单位"/>
-                    <span>*</span>
+                    <label for="billCom">商品单位：</label>
+                    <input type="text" name="productUnit" id="billCom" required/>
+                    <span>*请输入商品单位</span>
 
                 </div>
                 <div>
-                    <label for="phone">商品数量：</label>
-                    <input type="text" name="productCount" id="phone" value="${bill.productCount}" placeholder="请输入商品数量"/>
-                    <span>*</span>
+                    <label for="billNum">商品数量：</label>
+                    <input type="text" name="productCount" id="billNum" required/>
+                    <span>*请输入大于0的正自然数，小数点后保留2位</span>
                 </div>
                 <div>
-                    <label for="address">总金额：</label>
-                    <input type="text" name="totalPrice" id="address" value="${bill.totalPrice}" placeholder="请输入总金额"/>
-                    <span>*</span>
+                    <label for="money">总金额：</label>
+                    <input type="text" name="totalPrice" id="money" required/>
+                    <span>*请输入大于0的正自然数，小数点后保留2位</span>
                 </div>
                 <div>
-                    <label for="fax">供应商：</label>
-                    <input type="text" name="proName" id="fax" value="${proName}" placeholder="请输入供应商" readonly="readonly"/>
-                    <span>*</span>
+                    <label >供应商：</label>
+                    <select name="proName" >
+                        <option value="">--请选择相应的提供商--</option>
+                        <c:forEach items="${list}" var="provider">
+                        <option value="${provider.id}">${provider.proName}</option>
+                        </c:forEach>
+
+                    </select>
+                    <span>*请选择供应商</span>
                 </div>
                 <div>
                     <label >是否付款：</label>
-                    <c:if test="${bill.isPayment == 1}">
-                    <input type="radio" name="isPayment" value="1" checked/>未付款
-                    <input type="radio" name="isPayment" value="2"/>已付款
-                    </c:if>
-                    <c:if test="${bill.isPayment == 2}">
-                        <input type="radio" name="isPayment" value="1"/>未付款
-                        <input type="radio" name="isPayment" value="2" checked/>已付款
-                    </c:if>
+                    <input type="radio" value="2" name="isPayment"checked />未付款
+                    <input type="radio" value="1" name="isPayment"/>已付款
                 </div>
                 <div class="providerAddBtn">
                     <!--<a href="#">保存</a>-->
