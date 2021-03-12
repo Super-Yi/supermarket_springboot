@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>账单添加-超市账单管理系统</title>
-    <link th:include="common :: common_css">
+    <link th:insert="common :: common_css">
 </head>
 <body>
 <!--头部-->
@@ -77,7 +77,6 @@
 </section>
 <footer class="footer">
 </footer>
-<script src="js/time.js"></script>
-
+<div th:include="common :: time"></div>
 </body>
 </html>

@@ -1,6 +1,3 @@
-/**
- * Created by yaling.he on 2015/11/18.
- */
 //时间
 function fn(){
     var time = new Date();

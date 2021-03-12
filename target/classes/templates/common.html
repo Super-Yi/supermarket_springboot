@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="common_css">
-    <link rel="stylesheet" href="css/public.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <!--头部-->
@@ -24,13 +24,22 @@
     <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
     <nav>
         <ul class="list">
-            <li ><a href="jsp/billList.jsp">账单管理</a></li>
+            <li ><a th:href="@{/bill/list}">账单管理</a></li>
             <li><a href="jsp/providerList.jsp">供应商管理</a></li>
             <li><a href="jsp/userList.jsp">用户管理</a></li>
             <li><a href="jsp/password.jsp">密码修改</a></li>
             <li><a href="jsp/login.jsp">退出系统</a></li>
         </ul>
     </nav>
+</div>
+<div th:fragment="time">
+    <script th:src="@{/js/time.js}"></script>
+</div>
+<div th:fragment="jquery">
+    <script th:src="@{/js/time.js}"></script>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/js.js}"></script>
+
 </div>
 </body>
 </html>
