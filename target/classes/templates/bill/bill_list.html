@@ -58,23 +58,23 @@
                     <th width="30%">操作</th>
                 </tr>
                 <c:forEach items="${pb.list}" var="bill" varStatus="s">
-                    <tr>
-                        <td>${bill.billCode}</td>
-                        <td>${bill.productName}</td>
-                        <td>${bill.proName}</td>
-                        <td>${bill.totalPrice}</td>
-                        <td>${bill.isPayment}</td>
-                        <td>${bill.creationDate}</td>
+                    <tr th:each="bill:${bills.list}">
+                        <td th:text="${bill.billCode}"></td>
+                        <td th:text="${bill.productName}"></td>
+                        <td th:text="${bill.proName}"></td>
+                        <td th:text="${bill.totalPrice}"></td>
+                        <td th:text="${bill.isPayment}"></td>
+                        <td th:text="${bill.creationDate}"></td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/goLookBillServlet?id=${bill.id}&proName=${bill.proName}"><img src="img/read.png" alt="查看" title="查看"/></a>
-                            <a href="${pageContext.request.contextPath}/goUpdateBillServlet?id=${bill.id}&proName=${bill.proName}"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
-                            <button type="button" onclick="del(${bill.id})"><img src="img/schu.png" alt="删除" title="删除"/></button>
+                            <a href="${pageContext.request.contextPath}/goLookBillServlet?id=${bill.id}&proName=${bill.proName}"><img th:src="@{/img/read.png}" alt="查看" title="查看"/></a>
+                            <a href="${pageContext.request.contextPath}/goUpdateBillServlet?id=${bill.id}&proName=${bill.proName}"><img th:src="@{/img/xiugai.png}" alt="修改" title="修改"/></a>
+                            <button type="button" onclick="del(${bill.id})"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></button>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
         </form>
-        <div>
+        <!--<div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <c:if test="${pb.currentPage == 1}">
@@ -101,7 +101,15 @@
                         </a>
                 </ul>
             </nav>
-        </div>
+        </div>-->
+        <ul>
+            <li class="page-item" th:if="${bills.pageNum!=1}"><a class="page-link" th:href="@{/bill/list(pageNum=1)}">首页</a></li>
+            <li class="page-item" th:if="${bills.pageNum!=1}"><a class="page-link" th:href="@{/bill/list(pageNum=${bills.hasPreviousPage}?${bills.prePage}:${bills.pages})}">上一页</a></li>
+            <li class="page-item"><a class="page-link"><span th:text="第+${bills.pageNum}+页"></span></a></li>
+            <li class="page-item"><a class="page-link"><span th:text="共+${bills.pages}+页"></span></a></li>
+            <li class="page-item" th:if="${bills.pageNum != bills.pages}"><a class="page-link" th:href="@{/bill/list(pageNum=${bills.hasNextPage}?${bills.nextPage}:${bills.pages})}">下一页</a></li>
+            <li class="page-item" th:if="${bills.pageNum != bills.pages}"><a class="page-link" th:href="@{/bill/list(pageNum=${bills.pages})}">尾页</a></li>
+        </ul>
     </div>
 </section>
 
