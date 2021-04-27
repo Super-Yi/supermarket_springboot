@@ -20,9 +20,9 @@
             <span>账单管理页面 >> 订单添加页面</span>
         </div>
         <div class="providerAdd">
-            <form action="/addBillServlet" method="post">
+            <form th:action="@{/bill/add}" method="post">
                 <!--div的class 为error是验证错误，ok是验证成功-->
-                <div class="">
+                <div>
                     <label for="billId">订单编码：</label>
                     <input type="text" name="billCode" id="billId" required/>
                     <span>*请输入订单编码</span>
@@ -52,16 +52,16 @@
                     <label >供应商：</label>
                     <select name="proName" >
                         <option value="">--请选择相应的提供商--</option>
-                        <c:forEach items="${list}" var="provider">
+                        <!--<c:forEach items="${list}" var="provider">
                             <option value="${provider.id}">${provider.proName}</option>
-                        </c:forEach>
+                        </c:forEach>-->
 
                     </select>
                     <span>*请选择供应商</span>
                 </div>
                 <div>
                     <label >是否付款：</label>
-                    <input type="radio" value="2" name="isPayment"checked />未付款
+                    <input type="radio" value="0" name="isPayment"/>未付款
                     <input type="radio" value="1" name="isPayment"/>已付款
                 </div>
                 <div class="providerAddBtn">

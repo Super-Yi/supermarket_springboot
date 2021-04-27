@@ -20,7 +20,7 @@
         <form id="form1" action="${pageContext.request.contextPath}/findBillServlet" method="post">
             <div class="search">
                 <span>商品名称：</span>
-                <input type="text" name="productName" value="${map.productName[0]}" placeholder="请输入商品的名称"/>
+                <input type="text" name="productName" value="" placeholder="请输入商品的名称"/>
 
                 <span>供应商：</span>
                 <select name="tigong" >
@@ -44,7 +44,7 @@
                 </select>
 
                 <input type="submit" value="查询"/>
-                <a href="/goBillAddServlet">添加订单</a>
+                <a th:href="@{/bill/add}">添加订单</a>
             </div>
             <!--账单表格 样式和供应商公用-->
             <table class="providerTable" cellpadding="0" cellspacing="0">
@@ -57,7 +57,8 @@
                     <th width="10%">创建时间</th>
                     <th width="30%">操作</th>
                 </tr>
-                <c:forEach items="${pb.list}" var="bill" varStatus="s">
+                <!--<c:forEach items="${pb.list}" var="bill" varStatus="s">-->
+
                     <tr th:each="bill:${bills.list}">
                         <td th:text="${bill.billCode}"></td>
                         <td th:text="${bill.productName}"></td>
@@ -67,41 +68,13 @@
                         <td th:text="${bill.creationDate}"></td>
                         <td>
                             <a href="${pageContext.request.contextPath}/goLookBillServlet?id=${bill.id}&proName=${bill.proName}"><img th:src="@{/img/read.png}" alt="查看" title="查看"/></a>
-                            <a href="${pageContext.request.contextPath}/goUpdateBillServlet?id=${bill.id}&proName=${bill.proName}"><img th:src="@{/img/xiugai.png}" alt="修改" title="修改"/></a>
-                            <button type="button" onclick="del(${bill.id})"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></button>
+                            <a th:href="@{/bill/update(id=${bill.id})}"><img th:src="@{/img/xiugai.png}" alt="修改" title="修改"/></a>
+                            <button type="button" th:onclick="@{del(${bill.id}})"><img th:src="@{/img/schu.png}" alt="删除" title="删除"/></button>
                         </td>
                     </tr>
-                </c:forEach>
+         <!--       </c:forEach>-->
             </table>
         </form>
-        <!--<div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <c:if test="${pb.currentPage == 1}">
-                        <li class="disabled">
-                    </c:if>
-                    <c:if test="${pb.currentPage != 1}">
-                        <li>
-                    </c:if>
-                    <a href="${pageContext.request.contextPath}/findBillServlet?currentPage=${pb.currentPage - 1}&rows=5&name=${map.name[0]}&address=${map.place[0]}&email=${map.email[0]}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <c:forEach begin="1" end="${pb.totalPage}" var="i" >
-                        <c:if test="${pb.currentPage == i}">
-                            <li class="active"><a href="${pageContext.request.contextPath}/findBillServlet?currentPage=${i}&rows=5&name=${map.name[0]}&address=${map.place[0]}&email=${map.Email[0]}">${i}</a></li>
-                        </c:if>
-                        <c:if test="${pb.currentPage != i}">
-                            <li><a href="${pageContext.request.contextPath}/findBillServlet?currentPage=${i}&rows=5&name=${map.name[0]}&address=${map.place[0]}&email=${map.Email[0]}">${i}</a></li>
-                        </c:if>
-                    </c:forEach>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/findBillServlet?currentPage=${pb.currentPage + 1}&rows=5&name=${map.name[0]}&address=${map.place[0]}&email=${map.Email[0]}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                </ul>
-            </nav>
-        </div>-->
         <ul>
             <li class="page-item" th:if="${bills.pageNum!=1}"><a class="page-link" th:href="@{/bill/list(pageNum=1)}">首页</a></li>
             <li class="page-item" th:if="${bills.pageNum!=1}"><a class="page-link" th:href="@{/bill/list(pageNum=${bills.hasPreviousPage}?${bills.prePage}:${bills.pages})}">上一页</a></li>
@@ -135,7 +108,7 @@
 <script type="text/javascript">
     function del(a) {
         if(window.confirm("删除?"))
-            document.location="/deleteBillServlet?id="+a;
+            document.location="/bill/delete?id="+a;
     }
 </script>
 </html>

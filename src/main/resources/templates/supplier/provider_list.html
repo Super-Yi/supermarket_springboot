@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,6 +11,77 @@ xmlns:th="http://www.thymeleaf.org"
 <header th:replace="common :: common_header"></header>
 <!--时间-->
 <section th:replace="common :: common_time"></section>
-<div th:replace="common :: common_leftmenu"></div>
+<section class="publicMian ">
+    <div th:replace="common :: common_leftmenu"></div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>供应商管理页面</span>
+        </div>
+        <form id="form1" action="${pageContext.request.contextPath}/findProviderServlet" method="post">
+            <div class="search">
+                <span>供应商名称：</span>
+                <input type="text" name="proName" value="${map.proName[0]}" placeholder="请输入供应商的名称"/>
+                <input type="submit" value="查询"/>
+                <a href="providerAdd.jsp">添加供应商</a>
+            </div>
+            <!--供应商操作表格-->
+            <table class="providerTable" cellpadding="0" cellspacing="0">
+                <tr class="firstTr">
+                    <th width="10%">供应商编码</th>
+                    <th width="20%">供应商名称</th>
+                    <th width="10%">联系人</th>
+                    <th width="10%">联系电话</th>
+                    <th width="10%">传真</th>
+                    <th width="10%">创建时间</th>
+                    <th width="30%">操作</th>
+                </tr>
+                <c:forEach items="${pb.list}" var="provider" varStatus="s">
+                    <tr>
+                        <td>${provider.proCode}</td>
+                        <td>${provider.proName}</td>
+                        <td>${provider.proContact}</td>
+                        <td>${provider.proPhone}</td>
+                        <td>${provider.proFax}</td>
+                        <td>${provider.creationDate}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/goLookProviderServlet?id=${provider.id}"><img src="img/read.png" alt="查看" title="查看"/></a>
+                            <a href="${pageContext.request.contextPath}/goUpdateProviderServlet?id=${provider.id}"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
+                            <button type="button" onclick="del(${provider.id})"><img src="img/schu.png" alt="删除" title="删除"/></button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </form>
+        <div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <c:if test="${pb.currentPage == 1}">
+                        <li class="disabled">
+                    </c:if>
+                    <c:if test="${pb.currentPage != 1}">
+                        <li>
+                    </c:if>
+                    <a href="${pageContext.request.contextPath}/findProviderServlet?currentPage=${pb.currentPage - 1}&rows=5&name=${map.proName[0]}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    <c:forEach begin="1" end="${pb.totalPage}" var="i" >
+                        <c:if test="${pb.currentPage == i}">
+                            <li class="active"><a href="${pageContext.request.contextPath}/findProviderServlet?currentPage=${i}&rows=5&name=${map.proName[0]}">${i}</a></li>
+                        </c:if>
+                        <c:if test="${pb.currentPage != i}">
+                            <li><a href="${pageContext.request.contextPath}/findProviderServlet?currentPage=${i}&rows=5&name=${map.proName[0]}">${i}</a></li>
+                        </c:if>
+                    </c:forEach>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/findProviderServlet?currentPage=${pb.currentPage + 1}&rows=5&name=${map.proName[0]}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,6 +11,76 @@ xmlns:th="http://www.thymeleaf.org"
 <header th:replace="common :: common_header"></header>
 <!--时间-->
 <section th:replace="common :: common_time"></section>
-<div th:replace="common :: common_leftmenu"></div>
+<section class="publicMian ">
+    <div th:replace="common :: common_leftmenu"></div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>用户管理页面 >> 用户添加页面</span>
+        </div>
+        <div class="providerAdd">
+            <form action="${pageContext.request.contextPath}/addUserServlet" method="post">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="userId">用户编码：</label>
+                    <input type="text" name="userCode" id="userId"/>
+                    <span>*请输入用户编码，且不能重复</span>
+                </div>
+                <div>
+                    <label for="userName">用户名称：</label>
+                    <input type="text" name="userName" id="userName"/>
+                    <span >*请输入用户名称</span>
+                </div>
+                <div>
+                    <label for="userpassword">用户密码：</label>
+                    <input type="text" name="userPassword" id="userpassword"/>
+                    <span>*密码长度必须大于6位小于20位</span>
+
+                </div>
+                <div>
+                    <label for="userRemi">确认密码：</label>
+                    <input type="text" name="userRemi" id="userRemi"/>
+                    <span>*请输入确认密码</span>
+                </div>
+                <div>
+                    <label >用户性别：</label>
+
+                    <select name="gender" id = "gender">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                    <span></span>
+                </div>
+                <div>
+                    <label for="data">出生日期：</label>
+                    <input type="text" name="birthday" id="data"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label for="userphone">用户电话：</label>
+                    <input type="text" name="phone" id="userphone"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label for="userAddress">用户地址：</label>
+                    <input type="text" name="address" id="userAddress"/>
+                </div>
+                <div>
+                    <label >用户类别：</label>
+                    <input type="radio" name="userRole" value="管理员"/>管理员
+                    <input type="radio" name="userRole" value="经理"/>经理
+                    <input type="radio" name="userRole" value="普通用户"/>普通用户
+
+                </div>
+                <div class="providerAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="userList.jsp">返回</a>-->
+                    <input type="submit" value="保存"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 </body>
 </html>

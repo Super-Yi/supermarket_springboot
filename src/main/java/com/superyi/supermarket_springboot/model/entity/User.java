@@ -1,5 +1,6 @@
 package com.superyi.supermarket_springboot.model.entity;
 
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,14 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private int id;
+    private Integer id;
     private String userCode;
     private String userName;
     private String userPassword;
-    private int gender;
+    private Integer gender;
     private String birthday;
     private String phone;
     private String address;
-    private int userRole;
+    private Integer userRole;
     private String creationDate;
 }

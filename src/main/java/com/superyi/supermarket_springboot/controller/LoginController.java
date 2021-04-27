@@ -1,7 +1,7 @@
 package com.superyi.supermarket_springboot.controller;
 
 import com.superyi.supermarket_springboot.model.entity.User;
-import com.superyi.supermarket_springboot.service.AdminService;
+import com.superyi.supermarket_springboot.service.impl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
-    AdminService adminService;
+    AdminServiceImpl adminService;
 
     @GetMapping(value = {"/", "/login"})
     public String loginPage() {

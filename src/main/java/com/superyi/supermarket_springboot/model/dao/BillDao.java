@@ -8,16 +8,24 @@ import java.util.Map;
 
 @Mapper
 public interface BillDao {
+
     List<Bill> findBill();
+
+    void addBill(Bill bill);
+
+    void updateBill(Bill bill);
+
+    Bill findBillById(Integer id);
+
+    void deleteBillByID(Integer id);
 
     /*int getTotalCount(Map<String, String[]> map);
 
-    void deleteBillbyID(String id);
+
 
     Bill getBillbyID(String id);
 
 
-    void updateBill(Bill bill);
 
-    void addBill(Bill bill);*/
+    */
 }

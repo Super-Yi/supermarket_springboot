@@ -1,16 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-xmlns:th="http://www.thymeleaf.org"
 <link th:include="common :: common_css">
 <!--头部-->
 <header th:replace="common :: common_header"></header>
 <!--时间-->
 <section th:replace="common :: common_time"></section>
-<div th:replace="common :: common_leftmenu"></div>
+<section class="publicMian ">
+    <div th:replace="common :: common_leftmenu"></div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>账单管理页面 >> 订单修改页面</span>
+        </div>
+        <div class="providerAdd">
+            <form th:action="@{/bill/update}" method="post">
+                <input type="hidden" name="id" th:value="${bill.id}">
+                <!--div的class 为error是验证错误，ok是验证成功-->
+                <div class="">
+                    <label for="providerId">订单编码：</label>
+                    <input type="text" name="billCode" id="providerId" th:value="${bill.billCode}" placeholder="请输入订单编码"/>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="providerName">商品名称：</label>
+                    <input type="text" name="productName" id="providerName" th:value="${bill.productName}" placeholder="请输入订单编码"/>
+                    <span >*</span>
+                </div>
+                <div>
+                    <label for="people">商品单位：</label>
+                    <input type="text" name="productUnit" id="people" th:value="${bill.productUnit}" placeholder="请输入商品单位"/>
+                    <span>*</span>
+
+                </div>
+                <div>
+                    <label for="phone">商品数量：</label>
+                    <input type="text" name="productCount" id="phone" th:value="${bill.productCount}" placeholder="请输入商品数量"/>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="address">总金额：</label>
+                    <input type="text" name="totalPrice" id="address" th:value="${bill.totalPrice}" placeholder="请输入总金额"/>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="fax">供应商：</label>
+                    <input type="text" name="proName" id="fax" th:value="${bill.proName}" placeholder="请输入供应商" readonly="readonly"/>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label >是否付款：</label>
+                    <a th:if="${bill.isPayment.equals(0)}">
+                        <input type="radio" name="isPayment" value="0" checked/>未付款
+                        <input type="radio" name="isPayment" value="1"/>已付款
+                    </a>
+                    <a th:if="${bill.isPayment.equals(1)}">
+                        <input type="radio" name="isPayment" value="0"/>未付款
+                        <input type="radio" name="isPayment" value="1" checked/>已付款
+                    </a>
+                </div>
+                <div class="providerAddBtn">
+                    <!--<a href="#">保存</a>-->
+                    <!--<a href="billList.jsp">返回</a>-->
+                    <input type="submit" value="保存"/>
+                    <input type="button" value="返回" onclick="history.back(-1)"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
 </body>
 </html>

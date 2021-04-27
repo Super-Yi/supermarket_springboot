@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,6 +11,25 @@ xmlns:th="http://www.thymeleaf.org"
 <header th:replace="common :: common_header"></header>
 <!--时间-->
 <section th:replace="common :: common_time"></section>
-<div th:replace="common :: common_leftmenu"></div>
+<section class="publicMian ">
+    <div th:replace="common :: common_leftmenu"></div>
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>用户管理页面 >> 用户信息查看页面</span>
+        </div>
+        <div class="providerView">
+            <p><strong>用户编号：</strong><span>${user.userCode}</span></p>
+            <p><strong>用户名称：</strong><span>${user.userName}</span></p>
+            <p><strong>用户性别：</strong><span>${user.gender}</span></p>
+            <p><strong>出生日期：</strong><span>${user.birthday}</span></p>
+            <p><strong>用户电话：</strong><span>${user.phone}</span></p>
+            <p><strong>用户地址：</strong><span>${user.address}</span></p>
+            <p><strong>用户类别：</strong><span>${user.userRole}</span></p>
+
+            <a href="/findUserServlet">返回</a>
+        </div>
+    </div>
+</section>
 </body>
 </html>
